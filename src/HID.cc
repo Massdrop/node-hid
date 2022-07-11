@@ -77,6 +77,10 @@ HID::HID(const Napi::CallbackInfo &info)
     return;
   }
 
+  #if defined(__APPLE__) || defined(__MACH__)
+    hid_darwin_set_open_exclusive(0)
+  #endif
+
   if (info.Length() == 1)
   {
     // open by path
